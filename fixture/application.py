@@ -1,3 +1,5 @@
+import os
+
 from selenium import webdriver
 from fixture.session import SessionHelper
 from fixture.james import JamesHelper
@@ -12,8 +14,8 @@ class Application:
     def __init__(self, browser, config):
         if browser == "firefox":
             self.wd = webdriver.Firefox()
-        elif browser == "chrome":
-            self.wd = webdriver.Chrome()
+        elif browser.lower() == "chrome": # (executable_path=r'C:\path\to\chromedriver.exe')
+            self.wd = webdriver.Chrome(executable_path=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'\\chromedriver.exe')
         elif browser == "ie":
             self.wd = webdriver.Ie()
         else:
